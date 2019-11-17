@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render } from 'react-dom';
 import App from '../App';
 import { shallow, configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { createMemoryHistory } from 'history';
 import { MemoryRouter } from 'react-router';
 import {Top} from '../Top/TopPage'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import {ResistButton, SearchBox} from '../Top/TopComponents'
+import {Caption} from '../Top/TopComponents/Caption'
+import {SearchBox} from '../Top/TopComponents/SearchBox'
 
 configure({ adapter: new Adapter() });
 
@@ -30,7 +29,7 @@ describe('Top Page displayed collectly',() => {
       </MemoryRouter>);
       expect(wrapper.find(Top).length).toEqual(1)
       expect(wrapper.find(Header).length).toEqual(1)
-      expect(wrapper.find(ResistButton).length).toEqual(1)
+      expect(wrapper.find(Caption).length).toEqual(1)
       expect(wrapper.find(SearchBox).length).toEqual(1)
       expect(wrapper.find(Footer).length).toEqual(1)
   })
