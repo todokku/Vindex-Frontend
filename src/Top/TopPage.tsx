@@ -1,9 +1,11 @@
 import React from 'react';
-const Top = () => {
+import {ResistButton, SearchBox} from './TopComponents'
+export const Top = () => {
     return(
         <>
+            <h2>TagTube</h2>
+            <ResistButton />
+            <SearchBox />
         </>
     )
 }
-
-export default Top

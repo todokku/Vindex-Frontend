@@ -36,14 +36,14 @@
     ]
   },
   "devDependencies": {
+    "@material-ui/core": "^4.6.1",
+    "@material-ui/types": "^4.1.1",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/material-ui": "^0.21.7",
     "@types/react-router": "^5.1.3",
     "@types/react-test-renderer": "^16.9.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
-    "material-ui": "^0.20.2",
     "react-router": "^5.1.2",
     "react-test-renderer": "^16.12.0"
   }
