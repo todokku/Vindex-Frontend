@@ -9,6 +9,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import {Caption} from '../Top/TopComponents/Caption'
 import {SearchBox} from '../Top/TopComponents/SearchBox'
+import { act } from 'react-test-renderer';
 
 configure({ adapter: new Adapter() });
 
@@ -32,5 +33,13 @@ describe('Top Page displayed collectly',() => {
       expect(wrapper.find(Caption).length).toEqual(1)
       expect(wrapper.find(SearchBox).length).toEqual(1)
       expect(wrapper.find(Footer).length).toEqual(1)
+  })
+
+  it('TextBox will',() => {
+    const wrapper = mount(
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
+        <SearchBox />
+      </MemoryRouter>);
+      wrapper.find('#Search-SelectMenu-Tag').simulate('click')
   })
 })

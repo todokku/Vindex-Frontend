@@ -27,26 +27,10 @@ export const SearchBox = () => {
     )
 }
 
-interface SelectFieldProps{
-    SelectChange: (event: React.ChangeEvent<{value: unknown}>) => void
-    selectValue: string
-}
-
 interface InputFieldProps{
     TextFieldChange: (event: React.ChangeEvent<{value: string}>) => void
     textValue    : string
 }
-
-
-
-const InputField:React.FC<InputFieldProps> = ({TextFieldChange, textValue}) => {
-    return(
-        <>    
-            <Input onChange={TextFieldChange} value={textValue}/>
-        </>
-    )
-}
-
 
 const SelectField:React.FC<SelectFieldProps> = ({SelectChange, selectValue}) => {
     return(
@@ -54,10 +38,24 @@ const SelectField:React.FC<SelectFieldProps> = ({SelectChange, selectValue}) => 
             <FormControl>
                 <InputLabel>検索対象</InputLabel>
                 <Select onChange={SelectChange} value={selectValue}>
-                    <MenuItem value={"Tag"}>タグ</MenuItem>
-                    <MenuItem value={"Keyword"}>キーワード</MenuItem>
+                    <MenuItem value={"Tag"} id="Search-SelectMenu-Tag">タグ</MenuItem>
+                    <MenuItem value={"Keyword"} id="Search-SelectMenu-Keyword">キーワード</MenuItem>
                 </Select>
             </FormControl>
+        </>
+    )
+}
+
+
+interface SelectFieldProps{
+    SelectChange: (event: React.ChangeEvent<{value: unknown}>) => void
+    selectValue: string
+}
+
+const InputField:React.FC<InputFieldProps> = ({TextFieldChange, textValue}) => {
+    return(
+        <>    
+            <Input onChange={TextFieldChange} value={textValue} id="Search-TextField" />
         </>
     )
 }
@@ -65,7 +63,7 @@ const SelectField:React.FC<SelectFieldProps> = ({SelectChange, selectValue}) => 
 const SearchButton:React.FC<{onClick:()=>void}> = ({onClick}) => {
     return(
         <>
-            <Button onClick={onClick}>
+            <Button onClick={onClick} id="Search-Button">
                 検索
             </Button>
         </>
