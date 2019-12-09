@@ -8,7 +8,7 @@ import {Top} from '../Top/TopPage'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import {Caption} from '../Top/TopComponents/Caption'
-import {SearchBox} from '../Top/TopComponents/SearchBox'
+import {SearchBox} from '../components/SearchBox'
 import { act } from 'react-test-renderer';
 
 configure({ adapter: new Adapter() });

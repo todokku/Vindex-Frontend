@@ -17,7 +17,7 @@ const Logo = () => {
     return(
         <>
             <Typography variant="h2">
-                TagTube
+                Vindex
             </Typography>
         </>
     )

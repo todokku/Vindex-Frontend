@@ -3,7 +3,7 @@ import {Select, MenuItem, TextField, InputLabel, FormControl, Input, Button} fro
 import { textAlign } from '@material-ui/system';
 
 export const SearchBox = () => {
-    const [searchTarget, setSearchTarget] = useState<string>("")
+    const [searchTarget, setSearchTarget] = useState<string>("Tag")
     const [searchWord, setSearchWord] = useState<string>("")
 
     const SelectChange = (event: React.ChangeEvent<{value: unknown}>) => {

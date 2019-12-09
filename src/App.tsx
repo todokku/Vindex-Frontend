@@ -7,17 +7,32 @@ import {Top} from './Top/TopPage';
 import {Watch} from './Watch/WatchPage';
 import {Search} from './Search/SearchPage';
 
+import { Container, Grid, Box } from '@material-ui/core';
+
 
 
 const App: React.FC = () => {
   return (
     <>
       <Header />
-        <Switch>
-          <Route exact path="/" component={Top} />
-          <Route exact path="/watch" component={Watch} />
-          <Route exact path="/search" component={Search} />
-        </Switch>
+        <Container maxWidth="lg">
+          <Grid container justify="center">
+            <Grid item>
+              <Box m={10} />
+
+              <Switch>
+                <Route exact path="/" component={Top} />
+                <Route path="/watch">
+                  <Watch />
+                </Route>
+                <Route path="/search/:queryString">
+                  <Search />
+                </Route>
+              </Switch>
+
+            </Grid>
+          </Grid>
+        </Container>
       <Footer />
     </>
   );

@@ -20,7 +20,7 @@ const Header = () => {
             <AppBar>
                 <Toolbar>
                     <Typography variant="h6">
-                        TagTube
+                        Vindex
                     </Typography>
 
                     <Button onClick={twitterLogin}>
