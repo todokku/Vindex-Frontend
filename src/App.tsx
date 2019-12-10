@@ -8,6 +8,7 @@ import {Watch} from './Watch/WatchPage';
 import {Search} from './Search/SearchPage';
 
 import { Container, Grid, Box } from '@material-ui/core';
+import queryString from 'query-string';
 
 
 
@@ -25,7 +26,7 @@ const App: React.FC = () => {
                 <Route path="/watch">
                   <Watch />
                 </Route>
-                <Route path="/search/:queryString">
+                <Route path="/search">
                   <Search />
                 </Route>
               </Switch>

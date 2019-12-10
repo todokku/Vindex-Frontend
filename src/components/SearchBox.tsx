@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Select, MenuItem, TextField, InputLabel, FormControl, Input, Button} from '@material-ui/core/'
 import { textAlign } from '@material-ui/system';
+import queryString from 'query-string'
+import { useHistory, useLocation } from 'react-router';
+import { queryToWord, queryToScope } from './functions'
 
-export const SearchBox = () => {
-    const [searchTarget, setSearchTarget] = useState<string>("Tag")
-    const [searchWord, setSearchWord] = useState<string>("")
+export const SearchBox = () => { 
+    const history = useHistory()
+    const location = useLocation()
+    let initialWord  :string = ""
+    let initialScope :string = "Tag"
+    if (location.search) {
+        initialWord  = queryToWord(location.search)
+        initialScope = queryToScope(location.search)
+    }
+
+    const [searchScope, setSearchScope] = useState<string>(initialScope)
+    const [searchWord, setSearchWord] = useState<string>(initialWord)
+
+    useEffect(() => {//画面遷移したときにquery parameterを反映する
+        setSearchWord(initialWord)
+    }, [location.search])
 
     const SelectChange = (event: React.ChangeEvent<{value: unknown}>) => {
-        setSearchTarget(event.target.value as string)
+        setSearchScope(event.target.value as string)
     }
 
     const TextFieldChange = (event: React.ChangeEvent<{value: string}>) => {
@@ -15,12 +31,17 @@ export const SearchBox = () => {
     }
     
     const search = () => {
-        console.log(searchWord, searchTarget)
+        const queryObject = {
+            q: searchWord.split(/\s+/),                                                       
+            t: searchScope                                                                                         
+        }
+        const queryUrl:string = queryString.stringify(queryObject, {arrayFormat: 'comma'})
+        history.push('/search?' + queryUrl)
     }
 
     return(
         <>    
-            <SelectField SelectChange={SelectChange} selectValue={searchTarget}/>
+            <SelectField SelectChange={SelectChange} selectValue={searchScope}/>
             <InputField TextFieldChange={TextFieldChange} textValue={searchWord} />
             <SearchButton onClick={search}/>
         </>
