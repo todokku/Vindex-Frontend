@@ -1,5 +1,6 @@
 import React from 'react';
 import { CardMedia, Typography, Button, Card, CardActions, CardContent } from '@material-ui/core';
+import { Link, useLocation } from 'react-router-dom';
 
 export const SearchResults = () => {
     return(
@@ -10,12 +11,18 @@ export const SearchResults = () => {
 }
 
 const SearchResult = () => {
+    let location = useLocation()
     const thumb_url:string = "http://img.youtube.com/vi/1awua0YrSRs/mqdefault.jpg"
     return(
         <>
             <Card>
-                <Thumbnail url={thumb_url} />
-                <MovieInfo />
+                <Link to={{pathname: `/watch/1awua0YrSRs`,
+                           state:   { background: location }
+                        }}
+                    >
+                    <Thumbnail url={thumb_url} />
+                    <MovieInfo />
+                </Link>
                 <Tags />
             </Card>
             
@@ -28,7 +35,6 @@ interface ThumbnailProps{
 }
 
 const Thumbnail: React.FC<ThumbnailProps> = ({url}) => {
-    console.log(url)
     return(
         <>
             <CardMedia        

@@ -1,28 +1,46 @@
 import React from 'react';
-import { Container, Grid, Box } from '@material-ui/core';
+import { Container, Grid, Box, Typography } from '@material-ui/core';
 import ReactPlayer from 'react-player'
+import Modal from 'react-modal'
+import { useParams } from 'react-router';
 
 export const Watch = () => {
-    const url="https://www.youtube.com/watch?v=TtIAVwmtS4g"
+    let { id } = useParams()
+
+    const url:string="https://www.youtube.com/watch?v="+id
     const config={
         youtube:{
+            playerVars:{
+                autoplay: 1,
+                controls: 1
+            }
         }
-    } 
+    }
+
     return(
         <>
             <Container maxWidth="lg">
-                <Box m={10} />
-                <Grid container direction="row">
-                    <Grid item direction="column" xs={12} md={8}>
-                        <ReactPlayer 
-                            url={url}/>
+                
+                    <Grid container direction="column">
+                        <Grid item xs={12} md={8}>
+                            <ReactPlayer 
+                                url={url}
+                                config={config}/>
+                            
+                        </Grid>
                         
+                        <Grid item xs={12} md={8}>
+                            <Typography variant="body1">
+                                動画タイトル
+                            </Typography>
+                            <Typography variant="body1">
+                                再生数
+                            </Typography>
+                            <Typography variant="body1">
+                                チャンネル名
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    
-                    <Grid item direction="column" xs={12} md={4}>
-                    
-                    </Grid>
-                </Grid>
             </Container>
         </>
     )
