@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Button, TextField, Typography } from '@material-ui/core';
+import { useLocation } from 'react-router';
 
 export const TagForm = () => {
-    const[Tags, setTags] = useState<string[]>(["タグ1", "タグ2", "タグ3"])
+    const[Tags, setTags] = useState<string[]>([])
     const[TagTextField, setTextField] = useState<string>("")
     const[toggleTag, setToggleTag] = useState<number>(-1)
 
@@ -31,7 +32,7 @@ export const TagForm = () => {
                            isToggled={(index==toggleTag)} 
                            onClick={() => setToggleTagMenu(index)}/>
             )}    
-            <TextField id="standard-basic" onChange={changeTextField} value={TagTextField} />
+            <TextField onChange={changeTextField} value={TagTextField} />
             <Button variant="outlined" onClick={setNewTag}>
                 新しいタグを入力
             </Button>
@@ -59,13 +60,22 @@ const TagButton:React.FC<TagButtonProps> = ({props, isToggled, onClick}) => {
     }
 
     const TagMenu = () => {
-        return(
-            <div>
+        const location = useLocation()
+        console.log(location)
+        const MenuStyle = {
+            backgroundColor: "#eee",
+            borderRadius   : 5,
+        }
+
+        if(location.pathname==="/registration") return null
+        else return(
+            <div style={MenuStyle}>
                 <Typography variant={"body1"}>このタグで検索</Typography>
                 <Typography variant={"body1"}>このタグをミュート</Typography>
             </div>
         )
     }
+
     return(
         <>
             <div style={{margin: 6}} >

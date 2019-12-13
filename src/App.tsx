@@ -7,6 +7,7 @@ import {Top} from './Top/TopPage';
 import {Watch} from './Watch/WatchPage';
 import {WatchModal} from './Watch/WatchModal';
 import {Search} from './Search/SearchPage';
+import {Registration} from './Registration/Registration'
 
 import { Container, Grid, Box } from '@material-ui/core';
 
@@ -30,6 +31,9 @@ const App: React.FC = () => {
                 </Route>
                 <Route path="/search">
                   <Search />
+                </Route>
+                <Route path="/registration">
+                  <Registration />
                 </Route>
               </Switch>
 

@@ -36,6 +36,10 @@ const Header = () => {
                     <Button onClick={twitterLogin}>
                         TwitterLogin
                     </Button>
+                    
+                    <Button href="/registration">
+                        動画登録
+                    </Button>
                 </Toolbar>
             </AppBar>
         </>

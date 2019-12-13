@@ -1,14 +1,18 @@
 import React from 'react';
 import { Container, Grid, Box, Typography } from '@material-ui/core';
 import ReactPlayer from 'react-player'
-import Modal from 'react-modal'
 import { useParams } from 'react-router';
 import { TagForm } from './WatchComponents/TagForm';
 
-export const Watch = () => {
-    let { id } = useParams()
+interface WatchProps{
+    vid?: string|undefined
+}
 
-    const url:string="https://www.youtube.com/watch?v="+id
+export const Watch:React.FC<WatchProps> = ({vid}) => {
+    const id = useParams()    
+    let url:string="https://www.youtube.com/watch?v="+vid
+    if(!vid) url="https://www.youtube.com/watch?v="+id //watchPageを直接URL入力した場合vidはundentifiedになる
+    console.log(url)
     const config={
         youtube:{
             playerVars:{

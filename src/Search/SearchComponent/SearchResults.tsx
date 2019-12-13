@@ -12,11 +12,12 @@ export const SearchResults = () => {
 
 const SearchResult = () => {
     let location = useLocation()
-    const thumb_url:string = "http://img.youtube.com/vi/1awua0YrSRs/mqdefault.jpg"
+    const vid: string = "46g2QvXVj1s"
+    const thumb_url:string = "http://img.youtube.com/vi/"+ vid  +"/mqdefault.jpg"
     return(
         <>
             <Card>
-                <Link to={{pathname: `/watch/cADu9rtlZGQ`,
+                <Link to={{pathname: `/watch/` + vid,
                            state:   { background: location }
                         }}
                     >
