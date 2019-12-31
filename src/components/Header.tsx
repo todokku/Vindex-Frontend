@@ -4,6 +4,28 @@ import { AppBar, Typography, Toolbar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { useHistory, useLocation } from 'react-router'
 
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+interface AuthResponse {
+    success: boolean,
+    profile: {
+        provider:   string,
+        uid:        string,
+        name:       string,
+        nickname:   string,
+        image:      string,
+    } 
+}
+
+/*
+    export interface AxiosResponse<T> {
+    data: T;
+    status: number;
+    statusText: string;
+    headers: any;
+    config: AxiosRequestConfig;
+    }
+ */
 const Header = () => {
     const history = useHistory()
     const location = useLocation()
@@ -12,13 +34,14 @@ const Header = () => {
 
         /*
         axios
-            .get("http://localhost:3000/api/v1/auth/twitter/")
+            .get<AuthResponse>("http://localhost:3000/api/v1/auth/twitter/")
             .then(result => {
                 const profile = result
                 console.log(profile)
             })
         */
-        window.location.href = 'http://localhost:3000/api/v1/auth/twitter/'
+        
+        window.location.href="http://localhost:3000/api/v1/auth/twitter"
     }
 
     const linkToTop = () => {
@@ -39,6 +62,10 @@ const Header = () => {
                     
                     <Button href="/registration">
                         動画登録
+                    </Button>
+
+                    <Button href="/mypage">
+                        マイページ
                     </Button>
                 </Toolbar>
             </AppBar>

@@ -10,12 +10,14 @@ import {Search} from './Search/SearchPage';
 import {Registration} from './Registration/Registration'
 
 import { Container, Grid, Box } from '@material-ui/core';
+import { MyPage } from './MyPage/MyPage';
 
 //Modal.setAppElement('#root')
 
 const App: React.FC = () => {
   let location = useLocation()
   let background = location.state && location.state.background
+
   return (
     <>
       <Header />
@@ -34,6 +36,9 @@ const App: React.FC = () => {
                 </Route>
                 <Route path="/registration">
                   <Registration />
+                </Route>
+                <Route path="/mypage">
+                  <MyPage />
                 </Route>
               </Switch>
 

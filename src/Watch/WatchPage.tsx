@@ -12,7 +12,7 @@ export const Watch:React.FC<WatchProps> = ({vid}) => {
     const id = useParams()    
     let url:string="https://www.youtube.com/watch?v="+vid
     if(!vid) url="https://www.youtube.com/watch?v="+id //watchPageを直接URL入力した場合vidはundentifiedになる
-    console.log(url)
+    
     const config={
         youtube:{
             playerVars:{

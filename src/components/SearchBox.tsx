@@ -59,8 +59,9 @@ const SelectField:React.FC<SelectFieldProps> = ({SelectChange, selectValue}) => 
             <FormControl>
                 <InputLabel>検索対象</InputLabel>
                 <Select onChange={SelectChange} value={selectValue}>
-                    <MenuItem value={"Tag"} id="Search-SelectMenu-Tag">タグ</MenuItem>
-                    <MenuItem value={"Keyword"} id="Search-SelectMenu-Keyword">キーワード</MenuItem>
+                    <MenuItem value={"Tag"} >タグ</MenuItem>
+                    <MenuItem value={"Title"}>タイトル</MenuItem>
+                    <MenuItem value={"Channel"}>チャンネル</MenuItem>
                 </Select>
             </FormControl>
         </>

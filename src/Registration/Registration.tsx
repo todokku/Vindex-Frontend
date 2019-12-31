@@ -23,14 +23,13 @@ export const Registration = () => {
                 loadYouTubeUrl={loadYouTubeUrl} 
                 YouTubeUrl={YouTubeUrl}
             />
-            {isLoaded && <Watch vid={videoId}/>}
+            <Watch vid={videoId}/>
         </>
     )
 }
 
 const ExtractVideoId = (Url:string) => {
     const urlPos:number = Url.indexOf("watch?v=")
-    console.log({urlPos})
     const videoId = Url.substr(urlPos+8, 11)
     return videoId
 }
