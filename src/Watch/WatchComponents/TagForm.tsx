@@ -4,10 +4,37 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import { useLocation } from 'react-router';
 import axios from 'axios';
 
+import { useDispatch, useSelector } from "react-redux";
+import {tagState} from '../../Reducer/tagReducer'
+import {userState} from '../../Reducer/userReducer'
+import {Tag, User} from '../../Action/actionTypes'
+import {loadTag, addTag, deleteTag, updateTag} from '../../Action/tagAction'
+
+const tagSelector = (state :any) => {return state.tagReducer}
+const userSelector = (state :any) => {return state.userReducer}
+
+const TagFormat = (userID: string, userName: string, tagValue: string):Tag =>{
+    return{       
+        user        : {
+            userID  : userID,
+            userName: userName,
+        },
+        value       : tagValue,
+        youtubeID   : "",
+    }
+}
+
+
 export const TagForm = () => {
-    const[Tags, setTags] = useState<string[]>([])
+    const dispatch = useDispatch()
+    const tagState:tagState = useSelector(tagSelector)
+    const userState:userState = useSelector(userSelector)
     const[TagTextField, setTextField] = useState<string>("")
     const[focusedTag, setFocusedTag] = useState<number>(-1)
+
+    const tags = tagState.tags
+    const userID = userState.userID
+    const userName = userState.userName
 
     const changeTextField = (e:any) => {
         setTextField(e.target.value)
@@ -15,25 +42,20 @@ export const TagForm = () => {
 
     const setNewTag = () => {
         if(!TagTextField) return null
-        if(Tags.length >= 20){
+        if(tags.length >= 20){
             window.alert("これ以上タグを追加できません")
             return null
         }
-        //Tagsに直接pushで要素を追加すると、画面更新が行われず、うまくいかない。
-        //新しい配列を生成し、setTagsで代入して画面更新を行う。
-        const newTags = Tags.concat([TagTextField])
+        dispatch(addTag(TagFormat(userID, userName, TagTextField)))
         setTextField("")
-        setTags(newTags)
     }
 
     const setToggleTagMenu = (index:number) => {
         setFocusedTag(index)
     }
 
-    const deleteTag = () => {
-        const newTags = Tags.slice(0, Tags.length)
-        newTags.splice(focusedTag, 1)
-        setTags(newTags)
+    const deleteTagAction = () => {
+        dispatch(deleteTag(focusedTag))
         setFocusedTag(-1)
     }
 
@@ -51,12 +73,12 @@ export const TagForm = () => {
 
     return(
         <>
-            {Tags.map((value, index) => 
-                <TagButton props={value} 
+            {tags.map((value, index) => 
+                <TagButton props={value.value} 
                            key={index} 
                            isToggled={(index===focusedTag)} 
                            onClick={() => setToggleTagMenu(index)}
-                           deleteTag={() => deleteTag()}/>
+                           deleteTag={() => deleteTagAction()}/>
             )}    
             <TextField onChange={changeTextField} value={TagTextField} />
             <Button variant="outlined" onClick={setNewTag}>

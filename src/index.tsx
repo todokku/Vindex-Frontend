@@ -6,12 +6,17 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/styles';
 import {theme} from './Theme'
 
+import {Provider} from 'react-redux'
+import store from './store' 
+
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </ThemeProvider>,    
+    <Provider store={store}>
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ThemeProvider>
+    </Provider>,    
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
