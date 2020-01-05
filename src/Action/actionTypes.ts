@@ -6,6 +6,8 @@ export const SELECT_TAG = 'SELECT_TAG'
 
 export const AUTH_USER = 'AUTH_USER'
 
+export const FETCH_MOVIE = 'FETCH_MOVIE'
+
 export interface User{
     userID: string
     userName: string
@@ -56,3 +58,12 @@ export interface AuthUserAction {
 }
 
 export type UserActionTypes = AuthUserAction
+
+export interface FetchMovieAction {
+    type        : typeof FETCH_MOVIE
+    youtubeID   : string
+    title       : string
+    channelName : string 
+}
+
+export type FetchActionTypes = FetchMovieAction

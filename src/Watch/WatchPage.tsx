@@ -5,14 +5,16 @@ import { useParams } from 'react-router';
 import { TagForm } from './WatchComponents/TagForm';
 
 interface WatchProps{
-    vid?: string|undefined
+    vid?            : string|undefined
+    title?          : string
+    channelName?    : string   
 }
 
-export const Watch:React.FC<WatchProps> = ({vid}) => {
+export const Watch:React.FC<WatchProps> = ({vid, title, channelName}) => {
     const id = useParams()    
     let url:string="https://www.youtube.com/watch?v="+vid
     if(!vid) url="https://www.youtube.com/watch?v="+id //watchPageを直接URL入力した場合vidはundentifiedになる
-    
+    console.log({vid, title, channelName})
     const config={
         youtube:{
             playerVars:{
@@ -36,13 +38,10 @@ export const Watch:React.FC<WatchProps> = ({vid}) => {
 
                             <Grid item>
                                 <Typography variant="body1">
-                                    動画タイトル
+                                    {title}
                                 </Typography>
                                 <Typography variant="body1">
-                                    再生数
-                                </Typography>
-                                <Typography variant="body1">
-                                    チャンネル名
+                                    {channelName}
                                 </Typography>
                             </Grid>             
                         </Grid>
