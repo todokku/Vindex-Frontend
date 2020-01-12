@@ -8,6 +8,7 @@ import {Watch} from './Watch/WatchPage';
 import {WatchModal} from './Watch/WatchModal';
 import {Search} from './Search/SearchPage';
 import {Registration} from './Registration/Registration'
+import {Auth} from './Auth/Auth'
 
 import { Container, Grid, Box } from '@material-ui/core';
 import { MyPage } from './MyPage/MyPage';
@@ -39,6 +40,9 @@ const App: React.FC = () => {
                 </Route>
                 <Route path="/mypage">
                   <MyPage />
+                </Route>
+                <Route path="/auth">
+                  <Auth />
                 </Route>
               </Switch>
 

@@ -1,32 +1,71 @@
-import {User, UserActionTypes} from '../Action/actionTypes'
+import {UserActionTypes} from '../Action/actionTypes'
 
 export interface userState{
-    login: boolean
+    authenticated: boolean
+    accessToken: string
+    refreshToken: string
     userID: string
     userName: string
+    nickName: string
+    provider: string
+    image: string
 }
 
 const initialState = {
-    login: false,
+    authenticated: false,
+    accessToken: "",
+    refreshToken: "",
     userID: "",
-    userName: ""
+    userName: "",
+    provider: "",
+    image: "",
 }
 
-const tagReducer = (state = initialState, action:UserActionTypes) => {
+const userReducer = (state = initialState, action:UserActionTypes) => {
     switch(action.type) {
         case "AUTH_USER":{
             return{
                 ...state,
-                login: true,
-                userID: "",
-                userName: ""
+                authenticated   : true,
+                accessToken     : action.accessToken,
+                refreshToken    : action.refreshToken,
+                userID          : action.userID,
+            }        
+        }
+        
+        case "SET_USER_INFO":{
+            return{
+                ...state,
+                userName: action.userName,                
+                nickName: action.nickName, 
+                provider: action.provider, 
+                image   : action.image, 
             }        
         }
 
-        default: {return state}
+        case "UPDATE_TOKEN":{
+            return{
+                ...state,
+                accessToken     : action.accessToken,
+                refreshToken    : action.refreshToken,
+            }        
+        }
+        
+        case "SIGN_OUT":{
+            return{
+                initialState
+            }        
+        }
+
+        case "LEAVE_USER":{
+            return{
+                initialState
+            }        
+        }
+
+        default: return initialState
     }
 }
 
 
-
-export default tagReducer
+export default userReducer

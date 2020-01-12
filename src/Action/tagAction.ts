@@ -1,14 +1,5 @@
 import {Tag, LOAD_TAG, UPDATE_TAG, DELETE_TAG, ADD_TAG, TagActionTypes} from './actionTypes'
 
-/*
-export function selectTag(numSelectTag: number): TagActionTypes{
-    return {
-        type            : SELECT_TAG,
-        numSelectTag    : numSelectTag
-    }
-}
-*/
-
 export function loadTag(youtubeID:string, valueTags: Tag[]): TagActionTypes{
     return {
         type        : LOAD_TAG,

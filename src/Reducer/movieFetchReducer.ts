@@ -1,4 +1,4 @@
-import { FetchActionTypes } from '../Action/actionTypes'
+import { FetchMovieAction } from '../Action/actionTypes'
 
 export interface movieFetchState{
     youtubeID   :string
@@ -16,7 +16,7 @@ const initialState:movieFetchState = {
     channelName : ""
 }
 
-const movieFetchReducer = (state = initialState, action:FetchActionTypes) => {
+const movieFetchReducer = (state = initialState, action:FetchMovieAction) => {
     switch(action.type) {
         case "FETCH_MOVIE":{
             return{
@@ -29,7 +29,5 @@ const movieFetchReducer = (state = initialState, action:FetchActionTypes) => {
         default: {return state}
     }
 }
-
-
 
 export default movieFetchReducer
