@@ -11,12 +11,13 @@ export interface userState{
     image: string
 }
 
-const initialState = {
+const initialState: userState = {
     authenticated: false,
     accessToken: "",
     refreshToken: "",
     userID: "",
     userName: "",
+    nickName: "",
     provider: "",
     image: "",
 }
@@ -29,16 +30,17 @@ const userReducer = (state = initialState, action:UserActionTypes) => {
                 authenticated   : true,
                 accessToken     : action.accessToken,
                 refreshToken    : action.refreshToken,
+                provider        : action.provider, 
                 userID          : action.userID,
             }        
         }
         
         case "SET_USER_INFO":{
+            console.log({action})
             return{
                 ...state,
                 userName: action.userName,                
                 nickName: action.nickName, 
-                provider: action.provider, 
                 image   : action.image, 
             }        
         }

@@ -15,7 +15,7 @@ const userSelector = (state :any) => {return state.userReducer}
 
 const TagFormat = (userID: string, userName: string, tagValue: string):Tag =>{
     return{       
-        user        : {
+        contributer : {
             userID  : userID,
             userName: userName,
         },

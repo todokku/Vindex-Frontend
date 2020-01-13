@@ -20,7 +20,6 @@ export interface Contributer{
 export interface Tag{
     contributer : Contributer
     value       : string
-    timestump   : string
     youtubeID   : string
 }
 
@@ -76,13 +75,13 @@ export interface AuthUserAction {
     accessToken: string
     refreshToken: string
     userID: string
+    provider: string
 }
 
 export interface SetUserInfoAction{
     type: typeof SET_USER_INFO
     userName: string
     nickName: string
-    provider: string
     image: string
 }
 
@@ -90,7 +89,6 @@ export interface UpdateTokenAction {
     type: typeof UPDATE_TOKEN
     accessToken: string
     refreshToken: string
-    userID: string
 }
 
 export interface SignOutUserAction {
