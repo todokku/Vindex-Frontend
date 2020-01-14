@@ -4,20 +4,10 @@ import { AppBar, Typography, Toolbar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { useHistory, useLocation } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserInfo } from '../Action/userAction'
+import { useGetUserInfo } from './useGetUserInfo'
 
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
-interface AuthResponse {
-    success: boolean,
-    profile: {
-        provider:   string,
-        uid:        string,
-        name:       string,
-        nickname:   string,
-        image:      string,
-    } 
-}
 
 /*
     export interface AxiosResponse<T> {
@@ -31,14 +21,12 @@ interface AuthResponse {
 const Header = () => {
     const history = useHistory()
     const location = useLocation()
-    const userState = useSelector((state:any)=> state.userReducer)
-    const dispatch = useDispatch()
+    //const userState = useSelector((state:any)=> state.userReducer)
+    const [userState, getUserInfo, loading, error] = useGetUserInfo()
 
     console.log(userState)
     useEffect(()=>{
-        if(userState.authenticated){
-            dispatch(setUserInfo(userState.accessToken))
-        }
+        getUserInfo()
     }, [userState.accessToken])
 
     const twitterLogin = () => {
