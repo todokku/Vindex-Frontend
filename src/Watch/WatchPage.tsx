@@ -3,18 +3,30 @@ import { Container, Grid, Box, Typography } from '@material-ui/core';
 import ReactPlayer from 'react-player'
 import { useParams } from 'react-router';
 import { TagForm } from './WatchComponents/TagForm';
+import {RouteComponentProps} from 'react-router-dom'
+import { tagTypes } from '../Action/actionTypes'
 
-interface WatchProps{
-    vid?            : string|undefined
+type WatchPageProps = {
+    youtubeID?      : string
     title?          : string
-    channelName?    : string   
+    channelName?    : string
+    tagType         : tagTypes
+};
+
+interface RouteParams{ 
+    id: string  
 }
 
-export const Watch:React.FC<WatchProps> = ({vid, title, channelName}) => {
-    const id = useParams()    
-    let url:string="https://www.youtube.com/watch?v="+vid
-    if(!vid) url="https://www.youtube.com/watch?v="+id //watchPageを直接URL入力した場合vidはundentifiedになる
-    console.log({vid, title, channelName})
+export const Watch:React.FC<WatchPageProps> = ({youtubeID, title, channelName, tagType}) => {
+    let urlParams= useParams<RouteParams>()
+    let vid: string
+    if(urlParams.id) vid = urlParams.id
+    else if(youtubeID) vid = youtubeID
+    else vid = ""
+
+    let url:string = "https://www.youtube.com/watch?v=" + vid
+
+       console.log({youtubeID, title, channelName, tagType, urlParams, url})
     const config={
         youtube:{
             playerVars:{
@@ -48,7 +60,7 @@ export const Watch:React.FC<WatchProps> = ({vid, title, channelName}) => {
                     </Grid>
                       
                     <Grid item xs={12} md={3}>
-                        <TagForm />    
+                        <TagForm youtubeID={vid} tagType={tagType}/>    
                     </Grid>
                 </Grid>
             </Container>

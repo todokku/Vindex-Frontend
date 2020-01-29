@@ -7,15 +7,18 @@ import { ThemeProvider } from '@material-ui/styles';
 import {theme} from './Theme'
 
 import {Provider} from 'react-redux'
-import store from './store' 
+import store, {persistor} from './store' 
+import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.render(
     <Provider store={store}>
-        <ThemeProvider theme={theme}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={theme}>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </ThemeProvider>
+        </PersistGate>    
     </Provider>,    
     document.getElementById('root'));
 

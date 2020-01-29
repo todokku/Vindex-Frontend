@@ -1,7 +1,5 @@
-import {User, AUTH_USER, SET_USER_INFO, UPDATE_TOKEN, SIGN_OUT, LEAVE_USER, UserActionTypes} from './actionTypes'
-import { Provider, useDispatch } from 'react-redux';
-import Axios from 'axios';
-
+import {User, AUTH_USER, SET_USER_INFO, UPDATE_TOKENS, UPDATE_ACCESS_TOKEN, SIGN_OUT, LEAVE_USER, UserActionTypes} from './actionTypes'
+import { decodeJwt } from '../components/modules'
 /*
 interface UserInfoResponse{
     status: "success" | "failed"
@@ -15,7 +13,7 @@ interface UserInfoResponse{
 }
 */
 
-export function authUser(accessToken:string, refreshToken:string, userID: string, provider: string): UserActionTypes{
+export function authUser(accessToken:string, refreshToken:string, userID: string, provider: string, accessExp: number): UserActionTypes{
    // const dispatch = useDispatch()
    // dispatch(setUserInfo(accessToken))
     return {
@@ -23,7 +21,8 @@ export function authUser(accessToken:string, refreshToken:string, userID: string
         accessToken : accessToken,
         refreshToken: refreshToken,
         userID      : userID,
-        provider    : provider
+        provider    : provider,
+        accessExp   : accessExp,
     }
 }
 
@@ -34,16 +33,25 @@ export function setUserInfo(userName:string, nickName:string, image:string): Use
         nickName: nickName,
         image   : image
     }
+}
 
+export function updateAccessToken(accessToken:string): UserActionTypes{
+    const userInfo = decodeJwt(accessToken)
+    return {
+        type        : UPDATE_ACCESS_TOKEN,
+        accessToken : accessToken,
+        accessExp   : userInfo.exp,
+    }
 }
 
 
-
-export function updateToken(accessToken:string, refreshToken:string): UserActionTypes{
+export function updateTokens(accessToken:string, refreshToken:string): UserActionTypes{
+    const userInfo = decodeJwt(accessToken)
     return {
-        type        : UPDATE_TOKEN,
+        type        : UPDATE_TOKENS,
         accessToken : accessToken,
         refreshToken: refreshToken,
+        accessExp   : userInfo.exp,
     }
 }
 

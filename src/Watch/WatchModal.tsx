@@ -5,6 +5,7 @@ import { Watch } from './WatchPage';
 export const WatchModal = () => {
     let history = useHistory()
     let { id } = useParams()
+    if(!id) return null
 
     let back = (e:any) => {
         e.stopPropagation();
@@ -34,7 +35,7 @@ export const WatchModal = () => {
                 }}
                 onClick={(e)=>e.stopPropagation()}
             >
-                <Watch vid={id} />
+                <Watch youtubeID={id} tagType={"movie"}/>
             </div>
         </div>
     )

@@ -9,6 +9,7 @@ export interface userState{
     nickName: string
     provider: string
     image: string
+    accessExp: Date | null
 }
 
 const initialState: userState = {
@@ -20,6 +21,7 @@ const initialState: userState = {
     nickName: "",
     provider: "",
     image: "",
+    accessExp: null
 }
 
 const userReducer = (state = initialState, action:UserActionTypes) => {
@@ -32,6 +34,7 @@ const userReducer = (state = initialState, action:UserActionTypes) => {
                 refreshToken    : action.refreshToken,
                 provider        : action.provider, 
                 userID          : action.userID,
+                accessExp       : action.accessExp,
             }        
         }
         
@@ -45,11 +48,21 @@ const userReducer = (state = initialState, action:UserActionTypes) => {
             }        
         }
 
-        case "UPDATE_TOKEN":{
+        
+        case "UPDATE_ACCESS_TOKEN":{
+            return{
+                ...state,
+                accessToken     : action.accessToken,
+                accessExp       : action.accessExp,
+            }        
+        }
+
+        case "UPDATE_TOKENS":{
             return{
                 ...state,
                 accessToken     : action.accessToken,
                 refreshToken    : action.refreshToken,
+                accessExp       : action.accessExp,
             }        
         }
         
@@ -65,7 +78,7 @@ const userReducer = (state = initialState, action:UserActionTypes) => {
             }        
         }
 
-        default: return initialState
+        default: {return state}
     }
 }
 

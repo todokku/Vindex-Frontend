@@ -4,7 +4,9 @@ import { AppBar, Typography, Toolbar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { useHistory, useLocation } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux';
-import { useGetUserInfo } from './useGetUserInfo'
+import { useGetUserInfo } from './customHooks'
+import { refreshAccessToken } from '../components/modules'
+import {updateAccessToken} from '../Action/userAction'
 
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
@@ -18,15 +20,28 @@ axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded
     config: AxiosRequestConfig;
     }
  */
+const newAccessToken = async (refreshToken: string) => {
+    const resAccessToken = await refreshAccessToken(refreshToken)
+    return resAccessToken
+}
+
 const Header = () => {
     const history = useHistory()
     const location = useLocation()
     //const userState = useSelector((state:any)=> state.userReducer)
     const [userState, getUserInfo, loading, error] = useGetUserInfo()
+    const dispatch=useDispatch()
 
     console.log(userState)
+    if(userState.accessExp < Date.now()/1000){
+            newAccessToken(userState.refreshToken).then(resAccessToken => {
+            console.log({resAccessToken})
+            dispatch(updateAccessToken(resAccessToken.data.payload.access_token))
+            getUserInfo()
+        })
+    }
     useEffect(()=>{
-        getUserInfo()
+        //getUserInfo()
     }, [userState.accessToken])
 
     const twitterLogin = () => {
